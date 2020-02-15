@@ -10,10 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let urlString = "https://raw.githubusercontent.com/Softex-Group/task-mobile/master/test.json"
+    
     
     //Внешние зависимости
-    let networkService = NetworkService()
+    let dataFetcherService = DataFetcherService()
     let dataStore = DataStore()
 
     @IBOutlet weak var myTextField: UITextField!
@@ -27,7 +27,15 @@ class ViewController: UIViewController {
         
         saveButton.layer.cornerRadius = saveButton.frame.width/2
         
-        networkService.dataFetcher(urlString: urlString)
+        dataFetcherService.fetchCountry { (countries) in
+            print(countries?.first?.Name)
+        }
+        dataFetcherService.fetchFreeGames { (apps) in
+            print(apps?.feed.results.first?.artistName)
+        }
+        dataFetcherService.fetchNewGames { (games) in
+            print(games?.feed.results.first?.name)
+        }
     }
 
     //MARK: - Business logic
