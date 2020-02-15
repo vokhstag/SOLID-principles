@@ -8,7 +8,11 @@
 
 import Foundation
 
-class NetworkService {
+protocol Networking {
+    func request(urlString: String, complition: @escaping(Data?, Error?) -> Void)
+}
+
+class NetworkService: Networking {
     
     
     func request(urlString: String, complition: @escaping(Data?, Error?) -> Void) {
